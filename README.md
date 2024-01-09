@@ -1,6 +1,7 @@
-# Obsidian Image Inserter
-This [Obsidian][0] plugin allows you to insert images without needing a File Explorer. The images
-will be automatically embedded into your notes and copied to your Obsidian vault.
+# Obsidian Simple Image Inserter
+This [Obsidian][0] plugin allows you to insert images without needing an external File Explorer GUI.
+The images are selected through a built-in file explorer, automatically embedded into your notes,
+and copied to your Obsidian vault.
 
 This plugin was inspired by [Better File Link][1].
 
@@ -12,8 +13,8 @@ This plugin was inspired by [Better File Link][1].
 
 ## Installation
 To install the plugin:
-1. Search for "Image Inserter" in Obsidian's community plugins browser
-2. Enable the plugin in your Obsidian settings (find "Image Inserter" under "Community plugins")
+1. Search for "Simple Image Inserter" in Obsidian's community plugins browser
+2. Enable the plugin in your Obsidian settings (find "Simple Image Inserter" under "Community plugins")
 
 ## Using the Plugin
 To use the plugin:
