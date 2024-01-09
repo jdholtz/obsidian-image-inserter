@@ -1,0 +1,11 @@
+{
+	"id": "obsidian-image-inserter",
+	"name": "Image Inserter",
+	"version": "0.0.1",
+	"minAppVersion": "1.5.0",
+	"description": "Add images from the file system into Obsidian notes through a file explorer",
+	"author": "jdholtz",
+	"authorUrl": "https://github.com/jdholtz",
+	"fundingUrl": "https://github.com/sponsors/jdholtz",
+	"isDesktopOnly": false
+}
