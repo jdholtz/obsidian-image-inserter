@@ -1,5 +1,5 @@
 import { Plugin } from 'obsidian';
-import { FileModal } from "./file_modal";
+import { FileModal } from "./src/file_modal";
 
 export default class ImageInserter extends Plugin {
 	async onload() {

@@ -4,7 +4,6 @@
 import { Modal, App, Notice, MarkdownView } from "obsidian";
 import { FileEmbedder } from "./file_embedder";
 import path from "path";
-import ImageInserter from "./main";
 
 export class FileModal extends Modal {
 
