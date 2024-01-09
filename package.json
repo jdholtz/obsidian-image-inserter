@@ -1,7 +1,7 @@
 {
 	"name": "obsidian-image-inserter",
 	"version": "0.0.1",
-	"description": "Add images from the file system into Obsidian notes through a file explorer",
+	"description": "Add images from the file system into Obsidian notes through a file explorer.",
 	"main": "main.js",
 	"scripts": {
 		"dev": "node esbuild.config.mjs",
