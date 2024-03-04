@@ -46,6 +46,7 @@ export class FileModal extends Modal {
     }
 
     getAttachmentsDestination() {
+        // @ts-ignore
         const attachmentFolder = this.app.vault.config.attachmentFolderPath ?? "/";
         // @ts-ignore
         let basePath = this.app.vault.adapter.basePath;
