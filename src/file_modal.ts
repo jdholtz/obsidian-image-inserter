@@ -46,18 +46,17 @@ export class FileModal extends Modal {
     }
 
     getAttachmentsDestination() {
-        // @ts-ignore
-        const attachementFolder = this.app.vault.config.attachmentFolderPath;
+        const attachmentFolder = this.app.vault.config.attachmentFolderPath ?? "/";
         // @ts-ignore
         let basePath = this.app.vault.adapter.basePath;
 
         // Handle the attachment folder being in a subfolder of the current folder
-        if (attachementFolder.startsWith("./")) {
+        if (attachmentFolder.startsWith("./")) {
             // @ts-ignore
             basePath = path.join(basePath, this.app.workspace.getActiveFile().parent.path);
         }
 
-        return path.join(basePath, attachementFolder);
+        return path.join(basePath, attachmentFolder);
     }
 
     addText(text: string) {

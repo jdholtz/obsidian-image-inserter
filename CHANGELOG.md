@@ -1,5 +1,9 @@
 # Changelog
 
+## Upcoming
+### Bug Fixes
+- Fix attempting to insert images when no attachment folder has been configured (e.g. on a new vault)
+
 ## 0.0.2 (2024-01-08)
 
 ### Changes
