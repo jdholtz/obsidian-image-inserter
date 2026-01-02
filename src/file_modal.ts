@@ -11,7 +11,7 @@ export class FileModal extends Modal {
         super(app);
     }
 
-    onOpen() {
+    onOpen(): void {
         const { contentEl } = this;
         const input = contentEl.createEl("input", {
             type: "file",
@@ -23,7 +23,7 @@ export class FileModal extends Modal {
             this.close();
         });
 
-        input.addEventListener("change", () => {
+        input.addEventListener("change", async () => {
             this.close();
 
             const attachmentsDest = this.getAttachmentsDestination();
@@ -31,21 +31,30 @@ export class FileModal extends Modal {
 
             // Copy each file locally and add the embed text to the cursor's current position
             const fileList = Array.from(input.files || []);
-            fileList.forEach((file: File) => {
-                // @ts-ignore
-                const filePath = file.path;
-                fileEmbedder.copyFileToAttachmentsDir(filePath);
-                const embedLinkToFile = fileEmbedder.embedLinkFor(filePath);
-                this.addText(embedLinkToFile);
-            });
+            let failedCount = 0;
+            for (const file of fileList) {
+                try {
+                    await fileEmbedder.copyFileToAttachmentsDir(file);
+                    const embedLinkToFile = fileEmbedder.embedLinkFor(file.name);
+                    this.addText(embedLinkToFile);
+                } catch (error) {
+                    failedCount++;
+                    console.error(error);
+                }
+            }
 
-            new Notice(`Added ${fileList.length} images`);
+            // Notify the user of the result
+            if (failedCount > 0) {
+                new Notice(`Added ${fileList.length - failedCount} images; ${failedCount} failed to be inserted`);
+            } else {
+                new Notice(`Added ${fileList.length} images`);
+            }
         });
 
         input.click(); // Automatically go into the file selector
     }
 
-    getAttachmentsDestination() {
+    getAttachmentsDestination(): string {
         // @ts-ignore
         const attachmentFolder = this.app.vault.config.attachmentFolderPath ?? "/";
         // @ts-ignore
@@ -60,14 +69,14 @@ export class FileModal extends Modal {
         return path.join(basePath, attachmentFolder);
     }
 
-    addText(text: string) {
+    addText(text: string): void {
         const view = this.app.workspace.getActiveViewOfType(MarkdownView);
         if (view) {
             view.editor.replaceSelection(text);
         }
     }
 
-    onClose() {
+    onClose(): void {
         const { contentEl } = this;
         contentEl.empty();
     }

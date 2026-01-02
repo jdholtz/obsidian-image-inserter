@@ -9,16 +9,18 @@ export class FileEmbedder {
         this.attachmentsFolder = attachmentsFolder;
     }
 
-    embedLinkFor(filePath: string) {
-        const filename = path.basename(filePath);
+    embedLinkFor(filename: string): string {
         return "![[" + filename + "]]\n";
     }
 
-    copyFileToAttachmentsDir(filePath: string) {
+    async copyFileToAttachmentsDir(file: File): Promise<string> {
         // Make the attachments directory, if it doesn't exist
         fs.mkdirSync(this.attachmentsFolder, { recursive: true });
+        const destination = path.resolve(this.attachmentsFolder, file.name);
 
-        const fileName = path.basename(filePath);
-        fs.copyFileSync(filePath, path.resolve(this.attachmentsFolder, fileName));
+        const buffer = await file.arrayBuffer();
+        fs.writeFileSync(destination, Buffer.from(buffer));
+
+        return destination;
     }
 }
