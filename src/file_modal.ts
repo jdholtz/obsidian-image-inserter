@@ -1,12 +1,11 @@
-/* A screen to select image files to insert, copy them into the vault, and add a link referencing 
-* the image.
-*/
+/* A screen to select image files to insert, copy them into the vault, and add a link referencing
+ * the image.
+ */
 import { Modal, App, Notice, MarkdownView } from "obsidian";
 import { FileEmbedder } from "./file_embedder";
 import path from "path";
 
 export class FileModal extends Modal {
-
     constructor(app: App) {
         super(app);
     }
@@ -45,7 +44,9 @@ export class FileModal extends Modal {
 
             // Notify the user of the result
             if (failedCount > 0) {
-                new Notice(`Added ${fileList.length - failedCount} images; ${failedCount} failed to be inserted`);
+                new Notice(
+                    `Added ${fileList.length - failedCount} images; ${failedCount} failed to be inserted`,
+                );
             } else {
                 new Notice(`Added ${fileList.length} images`);
             }
