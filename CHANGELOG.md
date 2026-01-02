@@ -1,8 +1,12 @@
 # Changelog
 
-## Upcoming
+## 0.1.0 (2026-01-02)
+### New Features
+- Initial release (previously only pre-release)
+
 ### Bug Fixes
 - Fix inserting images on the latest Obsidian/Electron versions
+([#5](https://github.com/jdholtz/obsidian-image-inserter/issues/5))
 - Fix attempting to insert images when no attachment folder has been configured (e.g. on a new vault)
 - [Development] Add eslint and prettier support
 

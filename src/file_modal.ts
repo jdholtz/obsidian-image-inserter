@@ -57,14 +57,17 @@ export class FileModal extends Modal {
     }
 
     getAttachmentsDestination(): string {
+        // @ts-ignore
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
         const attachmentFolder = this.app.vault.config.attachmentFolderPath ?? "/";
+        // @ts-ignore
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         let basePath = this.app.vault.adapter.basePath;
 
         // Handle the attachment folder being in a subfolder of the current folder
         // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
         if (attachmentFolder.startsWith("./")) {
+            // @ts-ignore
             // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
             basePath = path.join(basePath, this.app.workspace.getActiveFile().parent.path);
         }
