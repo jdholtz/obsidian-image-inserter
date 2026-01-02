@@ -23,3 +23,6 @@ data.json
 
 # Ignore the compiled src/ files
 src/*.js
+
+# eslint
+.eslintcache

@@ -4,6 +4,7 @@
 ### Bug Fixes
 - Fix inserting images on the latest Obsidian/Electron versions
 - Fix attempting to insert images when no attachment folder has been configured (e.g. on a new vault)
+- [Development] Add eslint and prettier support
 
 ## 0.0.2 (2024-01-08)
 
