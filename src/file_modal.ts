@@ -58,8 +58,8 @@ export class FileModal extends Modal {
 
     getAttachmentsDestination(): string {
         // @ts-ignore
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-        const attachmentFolder = this.app.vault.config.attachmentFolderPath ?? "/";
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
+        const attachmentFolder = this.app.vault.getConfig("attachmentFolderPath") ?? "/";
         // @ts-ignore
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         let basePath = this.app.vault.adapter.basePath;
