@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.2.0 (2026-05-13)
+### New Features
+- Add support for mobile
+- Images with the same name will now be added with a suffix instead of being overwritten
+(e.g. `image.png` will become `image (1).png` if `image.png` already exists)
+
+### Bug Fixes
+- Fix not respecting custom attachment folder settings ([#7](https://github.com/jdholtz/obsidian-image-inserter/issues/7))
+
 ## 0.1.0 (2026-01-02)
 ### New Features
 - Initial release (previously only pre-release)
