@@ -1,9 +1,13 @@
 /* A screen to select image files to insert, copy them into the vault, and add a link referencing
  * the image.
  */
-import { Modal, App, Notice, MarkdownView } from "obsidian";
+import { Modal, App, Notice, MarkdownView, normalizePath } from "obsidian";
 import { FileEmbedder } from "./file_embedder";
-import path from "path";
+
+// The Obsidian Types don't type the 'getConfig' function so we need to type hint it
+interface Vault {
+    getConfig(name: "attachmentFolderPath"): string | null | undefined;
+}
 
 export class FileModal extends Modal {
     constructor(app: App) {
@@ -27,7 +31,7 @@ export class FileModal extends Modal {
             this.close();
 
             const attachmentsDest = this.getAttachmentsDestination();
-            const fileEmbedder = new FileEmbedder(attachmentsDest);
+            const fileEmbedder = new FileEmbedder(this.app, attachmentsDest);
 
             // Copy each file locally and add the embed text to the cursor's current position
             const fileList = Array.from(input.files || []);
@@ -57,23 +61,18 @@ export class FileModal extends Modal {
     }
 
     getAttachmentsDestination(): string {
-        // @ts-ignore
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
-        const attachmentFolder = this.app.vault.getConfig("attachmentFolderPath") ?? "/";
-        // @ts-ignore
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        let basePath = this.app.vault.adapter.basePath;
+        const vault = this.app.vault as typeof this.app.vault & Vault;
+        const attachmentFolder = vault.getConfig("attachmentFolderPath") ?? "/";
 
         // Handle the attachment folder being in a subfolder of the current folder
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
         if (attachmentFolder.startsWith("./")) {
-            // @ts-ignore
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-            basePath = path.join(basePath, this.app.workspace.getActiveFile().parent.path);
+            const activeFile = this.app.workspace.getActiveFile();
+            const activeFolderPath = activeFile?.parent?.path ?? "";
+            const relativeAttachmentFolder = attachmentFolder.slice(2);
+            return normalizePath(`${activeFolderPath}/${relativeAttachmentFolder}`);
         }
 
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-        return path.join(basePath, attachmentFolder);
+        return attachmentFolder;
     }
 
     addText(text: string): void {
