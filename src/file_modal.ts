@@ -38,8 +38,8 @@ export class FileModal extends Modal {
             let failedCount = 0;
             for (const file of fileList) {
                 try {
-                    await fileEmbedder.copyFileToAttachmentsDir(file);
-                    const embedLinkToFile = fileEmbedder.embedLinkFor(file.name);
+                    const copiedFile = await fileEmbedder.copyFileToAttachmentsDir(file);
+                    const embedLinkToFile = fileEmbedder.embedLinkFor(copiedFile);
                     this.addText(embedLinkToFile);
                 } catch (error) {
                     failedCount++;
